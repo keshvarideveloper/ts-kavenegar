@@ -1,6 +1,9 @@
 import { stringify } from 'query-string';
+import { MessageIdDto } from '../dto/message.id.dto';
 import { SendArrayDTO } from '../dto/send-array.dto';
 import { SendDTO } from '../dto/send.dto';
+import { StatusDto } from '../dto/status.dto';
+import { statusLocalMessageIdDto } from '../dto/status.localmessage.id.dto';
 import { KavenegarResponse } from '../error/error';
 const axios = require('axios').default;
 
@@ -46,5 +49,25 @@ export class Kavenegar {
 
   async sendarray(data: SendArrayDTO): Promise<IKavenegarResponse> {
     return await this.request<SendArrayDTO>({ action: ActionsEnum.SMS, method: MethodsEnum.SEND_ARRAY, data });
+  }
+
+  async status(data: StatusDto): Promise<IKavenegarResponse> {
+    return await this.request<StatusDto>({ action: ActionsEnum.SMS, method: MethodsEnum.STATUS, data });
+  }
+
+  async statuslocalmessageid(data: statusLocalMessageIdDto): Promise<IKavenegarResponse> {
+    return await this.request<statusLocalMessageIdDto>({
+      action: ActionsEnum.SMS,
+      method: MethodsEnum.STATUS_LOCAL_MESSAGE_ID,
+      data,
+    });
+  }
+
+  async select(data: MessageIdDto): Promise<IKavenegarResponse> {
+    return await this.request<MessageIdDto>({
+      action: ActionsEnum.SMS,
+      method: MethodsEnum.SELECT,
+      data,
+    });
   }
 }
