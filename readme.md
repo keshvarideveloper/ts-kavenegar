@@ -4,7 +4,7 @@ typescript package for kavenegar
 
 # Installation
 
-    $ npm i --save @mk/kavenegar-ts
+    $ npm i --save ts-kavenegar
 
 # Usage
 
