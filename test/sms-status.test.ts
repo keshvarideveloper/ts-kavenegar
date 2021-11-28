@@ -1,4 +1,6 @@
+import { SendArrayDTO } from '../lib/dto/send-array.dto';
 import { SendDTO } from '../lib/dto/send.dto';
+import { StatusDto } from '../lib/dto/status.dto';
 import { Kavenegar } from '../lib/index';
 
 let kavenegar: Kavenegar;
@@ -9,14 +11,20 @@ beforeAll(() => {
   process.env.NODE_ENV = 'test';
   return initializeKavenegar();
 });
-describe('send one sms test', () => {
-  test('send sms with code 200 or 416', () => {
-    const sendData: SendDTO = { message: 'سلام', receptor: '09013212713' };
+describe('check sms status', () => {
+  test('check with messageid', () => {
+    const sendData: StatusDto = {
+      messageid: 359148536,
+    };
     return kavenegar
-      .send(sendData)
+      .status(sendData)
       .then((data) => {
+        console.log('ok', data);
+
         expect(data.return.status).toBe(200);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log('err', err);
+      });
   });
 });

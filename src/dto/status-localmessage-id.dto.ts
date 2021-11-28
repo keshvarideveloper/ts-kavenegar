@@ -1,3 +1,3 @@
-export interface statusLocalMessageIdDto {
+export interface StatusLocalMessageIdDto {
   readonly localid: number;
 }

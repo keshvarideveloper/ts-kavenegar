@@ -1,10 +1,9 @@
-const axios = require('axios').default;
 import { stringify } from 'query-string';
-
+import axios, { AxiosRequestConfig, AxiosPromise } from 'axios';
 import { SendArrayDTO } from './dto/send-array.dto';
 import { SendDTO } from './dto/send.dto';
 import { StatusDto } from './dto/status.dto';
-import { statusLocalMessageIdDto } from './dto/status-localmessage-id.dto';
+import { StatusLocalMessageIdDto } from './dto/status-localmessage-id.dto';
 import { ActionsEnum, MethodsEnum, RequestOption } from './interfaces/request-option.interface';
 import { KavenegarOptions } from './interfaces/kavenegar-options.interface';
 import { IKavenegarSmsResponse } from './interfaces/response-sms.interface';
@@ -23,32 +22,34 @@ import { MessageIdDto } from './dto/message-id.dto';
 export class Kavenegar {
   private kavenegarOptions: KavenegarOptions = {};
   private mainPath: string;
+
   constructor(apikey: string, host: string = 'https://api.kavenegar.com', version: string = 'v1') {
     this.kavenegarOptions.apikey = apikey;
     this.kavenegarOptions.host = host;
     this.kavenegarOptions.version = version;
     this.mainPath = `${this.kavenegarOptions.version}/${this.kavenegarOptions.apikey}`;
   }
-  private async request<T, R>(requestOptions: RequestOption<T>): Promise<R> {
+  private async request<T, R>(requestOptions: RequestOption<T>): Promise<R | any> {
     const url = `/${this.mainPath}/${requestOptions.action}/${requestOptions.method}.json`;
+    console.log(url);
 
-    const postData = requestOptions.data ? stringify(requestOptions.data) : '';
+    const postData = requestOptions.data ? stringify(requestOptions.data) : undefined;
 
     const kavenegarReq = axios.create();
+
     return kavenegarReq
       .post(url, postData, {
         headers: {
-          'Content-Length': postData.length,
+          'Content-Length': postData ? postData.length.toString() : '0',
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
         },
-        port: '443',
         baseURL: this.kavenegarOptions.host,
       })
       .then((res: any) => {
         return new KavenegarResponse(res?.data);
       })
       .catch((error: any) => {
-        throw new KavenegarResponse(error?.response?.data);
+        return new KavenegarResponse(error?.response?.data);
       });
   }
 
@@ -76,8 +77,8 @@ export class Kavenegar {
     });
   }
 
-  async statuslocalmessageid(data: statusLocalMessageIdDto): Promise<IKavenegarSmsResponse> {
-    return await this.request<statusLocalMessageIdDto, IKavenegarSmsResponse>({
+  async statuslocalmessageid(data: StatusLocalMessageIdDto): Promise<IKavenegarSmsResponse> {
+    return await this.request<StatusLocalMessageIdDto, IKavenegarSmsResponse>({
       action: ActionsEnum.SMS,
       method: MethodsEnum.STATUS_LOCAL_MESSAGE_ID,
       data,
@@ -142,7 +143,7 @@ export class Kavenegar {
 
   async lookup(data: LookupDto): Promise<IKavenegarSmsResponse> {
     return await this.request<LookupDto, IKavenegarSmsResponse>({
-      action: ActionsEnum.SMS,
+      action: ActionsEnum.VERIFY,
       method: MethodsEnum.LOOKUP,
       data,
     });
