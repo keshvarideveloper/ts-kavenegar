@@ -1,5 +1,4 @@
 import { SendArrayDTO } from '../lib/dto/send-array.dto';
-import { SendDTO } from '../lib/dto/send.dto';
 import { Kavenegar } from '../lib/index';
 
 let kavenegar: Kavenegar;
@@ -10,7 +9,7 @@ beforeAll(() => {
   process.env.NODE_ENV = 'test';
   return initializeKavenegar();
 });
-describe('send array sms test', () => {
+describe('array sms test', () => {
   test('send with code 200', () => {
     const sendData: SendArrayDTO = {
       message: ['ممنون', 'خوبی'],

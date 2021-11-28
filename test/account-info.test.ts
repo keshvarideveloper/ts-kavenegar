@@ -1,4 +1,4 @@
-import { LookupDto } from '../lib/dto/lookup.dto';
+import { SendDTO } from '../lib/dto/send.dto';
 import { Kavenegar } from '../lib/index';
 
 let kavenegar: Kavenegar;
@@ -9,22 +9,13 @@ beforeAll(() => {
   process.env.NODE_ENV = 'test';
   return initializeKavenegar();
 });
-describe('sms lookup', () => {
-  test('lookup with one token', () => {
-    const sendData: LookupDto = {
-      receptor: '09013212713',
-      token: '123456',
-      template: 'tonet-verify-code',
-    };
+describe('account info', () => {
+  test('get account info', () => {
     return kavenegar
-      .lookup(sendData)
+      .info()
       .then((data) => {
-        console.log('ok', data);
-
         expect(data.return.status).toBe(200);
       })
-      .catch((err) => {
-        console.log('err', err);
-      });
+      .catch((err) => {});
   });
 });

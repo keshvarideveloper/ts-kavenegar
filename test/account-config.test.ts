@@ -1,4 +1,5 @@
-import { LookupDto } from '../lib/dto/lookup.dto';
+import { AccountConfigDto } from '../lib/dto/account-config.dto';
+import { SendDTO } from '../lib/dto/send.dto';
 import { Kavenegar } from '../lib/index';
 
 let kavenegar: Kavenegar;
@@ -9,22 +10,16 @@ beforeAll(() => {
   process.env.NODE_ENV = 'test';
   return initializeKavenegar();
 });
-describe('sms lookup', () => {
-  test('lookup with one token', () => {
-    const sendData: LookupDto = {
-      receptor: '09013212713',
-      token: '123456',
-      template: 'tonet-verify-code',
+describe('account config', () => {
+  test('set account config', () => {
+    const sendData: AccountConfigDto = {
+      mincreditalarm: 150000,
     };
     return kavenegar
-      .lookup(sendData)
+      .config(sendData)
       .then((data) => {
-        console.log('ok', data);
-
         expect(data.return.status).toBe(200);
       })
-      .catch((err) => {
-        console.log('err', err);
-      });
+      .catch((err) => {});
   });
 });

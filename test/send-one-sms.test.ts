@@ -9,8 +9,8 @@ beforeAll(() => {
   process.env.NODE_ENV = 'test';
   return initializeKavenegar();
 });
-describe('send one sms test', () => {
-  test('send sms with code 200 or 416', () => {
+describe('send sms test', () => {
+  test('send sms with code 200', () => {
     const sendData: SendDTO = { message: 'سلام', receptor: '09013212713' };
     return kavenegar
       .send(sendData)
