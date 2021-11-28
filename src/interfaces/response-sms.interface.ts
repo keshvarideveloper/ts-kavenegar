@@ -1,4 +1,4 @@
-export interface IKavenegarResponse {
+export interface IKavenegarSmsResponse {
   readonly return: {
     readonly message: number;
     readonly status: number;
@@ -11,6 +11,5 @@ export interface IKavenegarResponse {
     readonly sender: string;
     readonly receptor: string;
     readonly date: Date;
-    readonly cost: number;
   };
 }

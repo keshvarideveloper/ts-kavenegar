@@ -26,5 +26,5 @@ export enum MethodsEnum {
 export interface RequestOption<T> {
   readonly action: ActionsEnum;
   readonly method: MethodsEnum;
-  readonly data: T;
+  readonly data?: T;
 }
