@@ -31,7 +31,6 @@ export class Kavenegar {
   }
   private async request<T, R>(requestOptions: RequestOption<T>): Promise<R | any> {
     const url = `/${this.mainPath}/${requestOptions.action}/${requestOptions.method}.json`;
-    console.log(url);
 
     const postData = requestOptions.data ? stringify(requestOptions.data) : undefined;
 
