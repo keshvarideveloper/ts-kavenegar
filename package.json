@@ -1,5 +1,5 @@
 {
-  "name": "@mk/kavenegar",
+  "name": "ts-kavenegar",
   "version": "0.0.1",
   "description": "",
   "main": "lib/index.js",
