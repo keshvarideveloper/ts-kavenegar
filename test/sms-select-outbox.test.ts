@@ -2,11 +2,8 @@ import { SelectOutboxDto } from '../lib/dto/select-outbox.dto';
 import { Kavenegar } from '../lib/index';
 let kavenegar: Kavenegar;
 const errorResponse = {
-  return: {
-    status: 407,
-    message: 'دسترسی به اطلاعات مورد نظر برای شما امکان پذیر نیست',
-  },
-  entries: null,
+  name: 407,
+  message: 'دسترسی به اطلاعات مورد نظر برای شما امکان پذیر نیست',
 };
 
 function initializeKavenegar() {
@@ -23,7 +20,7 @@ describe('sms selectoutbox', () => {
       startdate: Math.floor(Date.now() / 1000),
     };
     return kavenegar.selectoutbox(sendData).catch((e) => {
-      expect(e).toEqual(errorResponse);
+      expect(e.name).toEqual(errorResponse.name);
     });
   });
 });
