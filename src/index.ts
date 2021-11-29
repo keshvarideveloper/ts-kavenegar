@@ -29,13 +29,12 @@ export class Kavenegar {
     this.kavenegarOptions.version = version;
     this.mainPath = `${this.kavenegarOptions.version}/${this.kavenegarOptions.apikey}`;
   }
-  private async request<T, R>(requestOptions: RequestOption<T>): Promise<R | any> {
+  private async request<T, R>(requestOptions: RequestOption<T>): Promise<R | KavenegarResponse> {
     const url = `/${this.mainPath}/${requestOptions.action}/${requestOptions.method}.json`;
 
     const postData = requestOptions.data ? stringify(requestOptions.data) : undefined;
 
     const kavenegarReq = axios.create();
-
     return kavenegarReq
       .post(url, postData, {
         headers: {
@@ -48,7 +47,8 @@ export class Kavenegar {
         return new KavenegarResponse(res?.data);
       })
       .catch((error: any) => {
-        return new KavenegarResponse(error?.response?.data);
+        if (error?.response?.data?.return) throw new KavenegarResponse(error.response.data);
+        throw new Error(error);
       });
   }
 
