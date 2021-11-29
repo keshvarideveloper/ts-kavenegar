@@ -18,19 +18,30 @@ $ npm i --save ts-kavenegar
 
 ```typescript
 import { Kavenegar } from 'ts-kavenegar";
-const kavenegar: Kavenegar = new Kavenegar("Your Kavenegar API key");
+```
+
+```typescript
+const kavenegar: Kavenegar = new Kavenegar('Your Kavenegar API key');
 ```
 
 ## Use it
 
 ```typescript
-import { SendDTO } from 'ts-kavenegar/lib/dto/send.dto';
+import { SendDTO } from 'ts-kavenegar";
+```
 
+```typescript
 const sendData: SendDTO = { message: 'hi..', receptor: '09120000000' };
 const result = await kavenegar.send(sendData);
 ```
 
 ## Error handling
+
+```typescript
+import { KavenegarError } from 'ts-kavenegar";
+```
+
+- With Async/await
 
 ```typescript
 try {
@@ -44,6 +55,8 @@ try {
   //handling other error
 }
 ```
+
+- With Promise => .then
 
 ```typescript
 kavenegar
