@@ -1,6 +1,6 @@
 {
   "name": "ts-kavenegar",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -27,6 +27,10 @@
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^4.5.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keshvarideveloper/ts-kavenegar.git"
   },
   "dependencies": {
     "@types/query-string": "^6.3.0",
