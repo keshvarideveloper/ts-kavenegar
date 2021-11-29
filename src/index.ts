@@ -18,6 +18,7 @@ import { AccountConfigDto } from './dto/account-config.dto';
 import { IKavenegarAccountResponse } from './interfaces/response-account.interface';
 import { KavenegarResponse } from './format/kavenegar-response';
 import { MessageIdDto } from './dto/message-id.dto';
+import { KavenegarError } from './error/kavenegar-error';
 
 export class Kavenegar {
   private kavenegarOptions: KavenegarOptions = {};
@@ -46,8 +47,8 @@ export class Kavenegar {
       .then((res: any) => {
         return new KavenegarResponse(res?.data);
       })
-      .catch((error: any) => {
-        if (error?.response?.data?.return) throw new KavenegarResponse(error.response.data);
+      .catch((error) => {
+        if (error?.response?.data?.return) throw new KavenegarError(error.response.data);
         throw new Error(error);
       });
   }
