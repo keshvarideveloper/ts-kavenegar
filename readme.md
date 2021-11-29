@@ -17,7 +17,7 @@ $ npm i --save ts-kavenegar
 ## Create instance
 
 ```typescript
-import { Kavenegar } from '@mk/kavenegar-ts";
+import { Kavenegar } from 'ts-kavenegar";
 const kavenegar: Kavenegar = new Kavenegar("Your Kavenegar API key");
 ```
 
