@@ -1,3 +1,5 @@
+This site was built using [GitHub Pages](https://pages.github.com/).
+
 # Description
 
 typescript package for kavenegar
@@ -10,8 +12,10 @@ typescript package for kavenegar
 
 ## Create instance
 
-    import { Kavenegar } from '@mk/kavenegar-ts";
-    const kavenegar: Kavenegar = new  Kavenegar("Your Kavenegar API key");
+```
+import { Kavenegar } from '@mk/kavenegar-ts";
+const kavenegar: Kavenegar = new Kavenegar("Your Kavenegar API key");
+```
 
 ## Use it
 
